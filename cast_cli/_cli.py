@@ -12,6 +12,16 @@ def main():
 
 
 @main.command()
+def list():
+    """
+    List the Chromecasts on the current network.
+    """
+
+    for each in pychromecast.get_chromecasts():
+        click.echo(each.device.friendly_name)
+
+
+@main.command()
 @click.option("--url", default=None)
 @click.option("--content-type", default="video/mp4")
 def play(url, content_type):
