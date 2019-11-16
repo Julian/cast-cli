@@ -22,7 +22,7 @@ def list():
 
 
 @main.command()
-@click.option("--url", default=None)
+@click.argument("url", default=None)
 @click.option("--content-type", default="video/mp4")
 def play(url, content_type):
     """
