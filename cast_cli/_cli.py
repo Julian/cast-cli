@@ -2,6 +2,7 @@ import click
 
 from cast_cli import __version__
 
+from pychromecast.controllers.youtube import YouTubeController
 import pychromecast
 
 
@@ -54,3 +55,17 @@ def seek(time):
     chromecast.media_controller.block_until_active()
     chromecast.media_controller.seek(int(mins or 0) * 60 + int(secs))
     chromecast.media_controller.block_until_active()
+
+
+@main.command()
+@click.argument("video_id")
+def youtube(video_id):
+    """
+    Play a specified YouTube video.
+    """
+
+    chromecast, = pychromecast.get_chromecasts()
+    chromecast.wait()
+    youtube = YouTubeController()
+    chromecast.register_handler(youtube)
+    youtube.play_video(video_id)
