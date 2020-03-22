@@ -49,6 +49,9 @@ def seek(time):
     Seek to the specified time.
     """
 
+    if time == "start":
+        time = "0"
+
     mins, _, secs = time.rpartition(":")
     chromecast, = pychromecast.get_chromecasts()
     chromecast.wait()
