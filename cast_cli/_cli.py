@@ -43,6 +43,19 @@ def play(url, content_type):
 
 
 @main.command()
+def pause():
+    """
+    Pause the playing content.
+    """
+
+    chromecast, = pychromecast.get_chromecasts()
+    chromecast.wait()
+    chromecast.media_controller.block_until_active()
+    chromecast.media_controller.pause()
+    chromecast.media_controller.block_until_active()
+
+
+@main.command()
 @click.argument("time")
 def seek(time):
     """
